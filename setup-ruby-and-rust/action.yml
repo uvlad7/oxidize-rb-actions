@@ -15,7 +15,7 @@ inputs:
   rubygems:
     description: "Runs `gem update --system`. See https://github.com/ruby/setup-ruby/blob/master/README.md for more info."
     required: false
-    default: 'default'
+    default: "default"
   working-directory:
     description: "The working directory to use for resolving paths for .ruby-version, .tool-versions and Gemfile.lock."
   cache-version:
@@ -164,7 +164,7 @@ runs:
         fi
 
     - name: Install cargo-cache
-      uses: oxidize-rb/actions/cargo-binstall@v1
+      uses: uvlad7/oxidize-rb-actions/cargo-binstall@main
       id: install-cargo-cache
       if: inputs.cargo-cache-clean == 'true' && steps.set-outputs.outputs.cargo-cache == 'tarball'
       with:
@@ -205,7 +205,7 @@ runs:
         cwd: ${{ inputs.working-directory }}
 
     - name: Install sccache
-      uses: oxidize-rb/actions/cargo-binstall@v1
+      uses: uvlad7/oxidize-rb-actions/cargo-binstall@main
       if: steps.set-outputs.outputs.cargo-cache == 'sccache'
       with:
         crate: sccache
@@ -222,7 +222,6 @@ runs:
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
           core.exportVariable('RUSTC_WRAPPER', process.env.RUSTC_WRAPPER || 'sccache');
           core.exportVariable('SCCACHE_C_CUSTOM_CACHE_BUSTER', '${{ inputs.cache-version }}-${{ steps.rust-toolchain.outputs.cachekey }}');
-
 
     - name: Install sccache
       if: steps.set-outputs.outputs.cargo-cache == 'sccache'

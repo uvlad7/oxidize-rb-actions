@@ -52,7 +52,7 @@ runs:
           rb-sys-dock-${{ inputs.cache-version }}-${{ inputs.platform }}-
 
     - name: Install cargo-cache
-      uses: oxidize-rb/actions/cargo-binstall@v1
+      uses: uvlad7/oxidize-rb-actions/cargo-binstall@main
       id: install-cargo-cache
       if: inputs.cargo-cache-clean == 'true'
       with:
